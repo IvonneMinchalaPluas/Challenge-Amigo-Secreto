@@ -21,3 +21,13 @@ function actualizarListaAmigos() {
       showAmigo.appendChild(li);
     });
   }
+
+  function sortearAmigo() {
+    if (amigos.length < 2) {
+      alert("Por favor, inserte al menos 2 nombres.");
+      return;
+    }
+    const amigoSecreto = amigos[Math.floor(Math.random() * amigos.length)];
+    const showAmigo = document.getElementById("resultado");
+    showAmigo.textContent = "El amigo secreto es: " + amigoSecreto;
+  }
