@@ -1,33 +1,60 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 let amigos = [];
+let nombresYaElegidos = []
 
-function agregarAmigo() {
-  const amigo = document.getElementById("amigo").value;
-  if (amigo === "") {
-    alert("Por favor, inserte un nombre.");
-    return;
-  }
-  amigos.push(amigo);
-  document.getElementById("amigo").value = "";
-  actualizarListaAmigos();
-}
+function agregarAmigo(){
+    let nombredeUsuario = document.getElementById('amigo').value.trim()
 
-function actualizarListaAmigos() {
-    const showAmigo = document.getElementById("listaAmigos");
-    showAmigo.innerHTML = "";
-    amigos.forEach((amigo) => {
-      const li = document.createElement("li");
-      li.textContent = amigo;
-      showAmigo.appendChild(li);
-    });
-  }
-
-  function sortearAmigo() {
-    if (amigos.length < 2) {
-      alert("Por favor, inserte al menos 2 nombres.");
-      return;
+    if(nombredeUsuario == '') {
+        alert('Por favor, ingrese un nombre');
+        return limpiarCaja ();
     }
-    const amigoSecreto = amigos[Math.floor(Math.random() * amigos.length)];
-    const showAmigo = document.getElementById("resultado");
-    showAmigo.textContent = "El amigo secreto es: " + amigoSecreto;
-  }
+    nombreDeAmigosSecretos.push(nombredeUsuario);
+    listaDeAmigos()
+    limpiarCaja();
+    console.log(nombreDeAmigosSecretos);
+};
+
+function limpiarCaja() {
+    document.getElementById('amigo'). value = '';
+};
+
+function listaDeAmigos() {
+    let lista = document.getElementById('listaAmigos')
+    lista.innerHTML = ''
+
+    for(let i=0; i<nombreDeAmigosSecretos.length; i++) {
+        lista.innerHTML += "<li>" + nombreDeAmigosSecretos[i] + "</li>"
+    };
+};
+listaDeAmigos()
+
+
+function sortearAmigo() {
+    if(nombreDeAmigosSecretos.length === 0) {
+        alert('No hay amigos para sortear')
+        return;
+    };
+
+    let nombreGenerado = Math.floor(Math.random()*nombreDeAmigosSecretos.length);
+    
+    let amigoSecreto = document.querySelector('#resultado');
+    amigoSecreto.innerHTML = `Tu amigo secreto es ${nombreDeAmigosSecretos[nombreGenerado]}`
+
+    let nombreSorteado = nombreDeAmigosSecretos[nombreGenerado]
+    nombresYaElegidos.push(nombreDeAmigosSecretos[nombreGenerado])
+    nombreDeAmigosSecretos.splice(nombreGenerado, 1)
+
+     mostrarNombresYaElegidos()
+
+};
+    
+function mostrarNombresYaElegidos() {
+    listaDeNombres = document.getElementById('nombresSorteados');
+    listaDeNombres.innerHTML = ''
+    listaDeNombres.innerHTML += '<li>' + 'Nombres sorteados' + '</li>'
+
+    for(let i = 0; i<nombresYaElegidos.length; i++) {
+        listaDeNombres.innerHTML += "<li>" + nombresYaElegidos[i] + "</li>"
+        };
+};
